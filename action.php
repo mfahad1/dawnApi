@@ -2,9 +2,10 @@
 	$date = $_POST["dates"];
 
 //	die(copy(makeApiStr($date,11) , 'E:/dawnPpr/'.imageName($date,11).'.jpg'));
-
+	mkdir("E:/dawnPpr");
 	for($i=1;;$i++){
-		if(copy(makeApiStr($date,$i) , 'E:/dawnPpr/'.imageName($date,$i).'.jpg')){
+		mkdir("E:/dawnPpr/".$date);
+		if(copy(makeApiStr($date,$i) , 'E:/dawnPpr/'.$date.'/'.imageName($date,$i).'.jpg')){
 			echo imageName($date,$i);
 			makeDateStrArticle($date,$i);
 		}else{
@@ -22,6 +23,8 @@
 		return $date .'/pages/'.$dateStr.'_';
 	}
 	function makeDateStrArticle($date,$pg){
+		mkdir("E:/dawnPpr/".$date."/Article".$dateStr.$pg);
+				$artileFolder =	"E:/dawnPpr/".$date."/Article".$dateStr.$pg;
 		$date = date('Y', strtotime($date)).'/'.date('m', strtotime($date)).'/'.date('d', strtotime($date));
 		$dateStr = date('d', strtotime($date)).'_'.date('m', strtotime($date)).'_'.date('Y', strtotime($date));
 				if($pg<10){
@@ -30,8 +33,7 @@
 					$pg= "0".$pg;
 				}
 
-		 mkdir("E:/dawnPpr/Article".$dateStr.$pg);
-				$artileFolder =	"E:/dawnPpr/Article".$dateStr.$pg;
+		 
 			for($i=1;;$i++){
 				$counter = null;
 				if($i<10){
